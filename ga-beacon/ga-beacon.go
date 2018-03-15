@@ -101,14 +101,14 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 	// / -> redirect
 	if len(params[0]) == 0 {
-		http.Redirect(w, r, "https://github.com/vitr/google-analytics-beacon", http.StatusFound)
+		http.Redirect(w, r, "http://imailing.com.br/", http.StatusFound)
 		return
 	}
 
 	// check allowed Tracking Ids
 	config := readConfig("ga-beacon/conf.json")
 	if !checkTrackingId(params[0], config.TrackingIds) {
-		http.Error(w, "Forbidden, read https://github.com/vitr/google-analytics-beacon", 403)
+		http.Error(w, "Forbidden, read http://imailing.com.br/", 403)
 		return
 	}
 
