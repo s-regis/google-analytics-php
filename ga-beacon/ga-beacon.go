@@ -164,7 +164,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	// Write out GIF pixel or badge, based on presence of "pixel" param.
 	w.Header().Set("Content-Type", "image/gif")
 	w.Write(pixel)
-	http.Redirect(w, r, query["link"], http.StatusFound)
+	http.Redirect(w, r, query["link"][0], http.StatusFound)
 	
 	
 }
