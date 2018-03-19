@@ -160,12 +160,30 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		logHit(c, params, query, r.Header.Get("User-Agent"), r.RemoteAddr, cid)
 		// delayHit.Call(c, params, r.Header.Get("User-Agent"), cid)
 	}
-
+	
+	http.Error(w, query.Get("link"), 403)
+	
 	// Write out GIF pixel or badge, based on presence of "pixel" param.
-	//w.Header().Set("Content-Type", "image/gif")
-	//w.Write(pixel)
-	http.Error(w, "Forbidden, query.Get("link"), 403)
-	http.Redirect(w, r, query.Get("link"), 301)
+
+	if _, ok := query["pixel"]; ok {
+		w.Header().Set("Content-Type", "image/gif")
+		w.Write(pixel)
+	} else if _, ok := query["gif"]; ok {
+		w.Header().Set("Content-Type", "image/gif")
+		w.Write(badgeGif)
+	} else if _, ok := query["flat"]; ok {
+		w.Header().Set("Content-Type", "image/svg+xml")
+		w.Write(badgeFlat)
+	} else if _, ok := query["flat-gif"]; ok {
+		w.Header().Set("Content-Type", "image/gif")
+		w.Write(badgeFlatGif)
+	} else {
+		w.Header().Set("Content-Type", "image/svg+xml")
+		w.Write(badge)
+	}
+	
+	
+	//http.Redirect(w, r, query.Get("link"), 301)
 	
 	
 }
