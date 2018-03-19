@@ -161,7 +161,8 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		// delayHit.Call(c, params, r.Header.Get("User-Agent"), cid)
 	}
 	
-	http.Error(w, query.Get("link"), 403)
+	//http.Error(w, query.Get("link"), 403)
+	http.Redirect(w, r, query.Get("link"), 301)
 	
 	// Write out GIF pixel or badge, based on presence of "pixel" param.
 
