@@ -162,22 +162,11 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Write out GIF pixel or badge, based on presence of "pixel" param.
-	if _, ok := query["pixel"]; ok {
-		w.Header().Set("Content-Type", "image/gif")
-		w.Write(pixel)
-	} else if _, ok := query["gif"]; ok {
-		w.Header().Set("Content-Type", "image/gif")
-		w.Write(badgeGif)
-	} else if _, ok := query["flat"]; ok {
-		w.Header().Set("Content-Type", "image/svg+xml")
-		w.Write(badgeFlat)
-	} else if _, ok := query["flat-gif"]; ok {
-		w.Header().Set("Content-Type", "image/gif")
-		w.Write(badgeFlatGif)
-	} else {
-		w.Header().Set("Content-Type", "image/svg+xml")
-		w.Write(badge)
-	}
+	w.Header().Set("Content-Type", "image/gif")
+	w.Write(pixel)
+	http.Redirect(w, r, query, http.StatusFound)
+	
+	
 }
 
 type Configuration struct {
