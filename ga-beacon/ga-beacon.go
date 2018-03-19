@@ -165,7 +165,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "image/gif")
 	w.Write(pixel)
 	var link []string
-	link := query["link"]
+	link = query["link"]
 	http.Redirect(w, r, link[0], http.StatusFound)
 	
 	
