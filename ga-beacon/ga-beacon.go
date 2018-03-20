@@ -164,6 +164,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	//Check if "link" param is used and redirect to the link
 	if _, ok := query["link"]; ok {
 		http.Redirect(w, r, query.Get("link"), 301)
+		return
 	}
 	
 	// Write out GIF pixel or badge, based on presence of "pixel" param.
