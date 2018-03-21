@@ -163,7 +163,10 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	
 	//Check if "link" param is used and redirect to the link
 	if _, ok := query["link"]; ok {
-		http.Redirect(w, r, query.Get("link"), 301)
+		link := query.Get("link")
+		link = strings.Replace(link,"[inter]","?",-1)
+		link = strings.Replace(link,"[ecom]","&",-1)
+		http.Redirect(w, r, link, 301)
 		return
 	}
 	
