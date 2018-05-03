@@ -178,11 +178,11 @@ func handler(w http.ResponseWriter, r *http.Request) {
 					cmp := query.Get("cmp")
 					dgt := query.Get("dgt")
 					php := "http://www.password.com.br/php/evt.php?adv=" + adv + "&cmp=" + cmp + "&lnk=" + params[1] + "&ipa="+ r.RemoteAddr + "&dgt=" + dgt
-					
+					/*
 					http.Error(w, php, 403)
 					return
-
-					//http.Post(php,"php",nil);
+					*/
+					http.Post(php,"php",nil);
 			
 
 		
@@ -229,11 +229,12 @@ func handler(w http.ResponseWriter, r *http.Request) {
 				dgt := query.Get("dgt")
 				
 				php := "http://www.password.com.br/php/evt.php?adv=" + adv + "&cmp=" + cmp + "&lnk=" + params[1] + "&ipa="+ r.RemoteAddr + "&dgt=" + dgt
-					
+				/*	
 				http.Error(w, php, 403)
 				return
+				*/
 
-				//http.Post(php,"php",nil);
+				http.Post(php,"php",nil);
 
 		
 			} 
