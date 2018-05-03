@@ -71,7 +71,7 @@ func log(c appengine.Context, ua string, ip string, cid string, values url.Value
 	return nil
 }
 
-func postphp(php string, ua string) error {
+func postphp(php string, ua string, c appengine.Context) error {
 
 	req, _ := http.NewRequest("POST", beaconURL, nil)
 	req.Header.Add("User-Agent", ua)
@@ -194,7 +194,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 					dgt := query.Get("dgt")
 					php := "http://www.password.com.br/php/evt.php?adv=" + adv + "&cmp=" + cmp + "&lnk=" + params[1] + "&ipa="+ r.RemoteAddr + "&dgt=" + dgt
 								
-					postphp(php,r.Header.Get("User-Agent"))
+					postphp(php,r.Header.Get("User-Agent"),c)
 			
 
 		
@@ -243,7 +243,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 				php := "http://www.password.com.br/php/evt.php?adv=" + adv + "&cmp=" + cmp + "&lnk=" + params[1] + "&ipa="+ r.RemoteAddr + "&dgt=" + dgt
 				
 
-				postphp(php,r.Header.Get("User-Agent"))
+				postphp(php,r.Header.Get("User-Agent"),c)
 				
 			} 
 		
