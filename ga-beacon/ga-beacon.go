@@ -177,8 +177,12 @@ func handler(w http.ResponseWriter, r *http.Request) {
 					adv := query.Get("adv")
 					cmp := query.Get("cmp")
 					dgt := query.Get("dgt")
+					php := "http://www.password.com.br/php/evt.php?adv=" + adv + "&cmp=" + cmp + "&lnk=" + params[1] + "&ipa="+ r.RemoteAddr + "&dgt=" + dgt
+					
+					http.Error(w, php, 403)
+					return
 
-					http.Post("http://www.password.com.br/php/evt.php?adv=" + adv + "&cmp=" + cmp + "&lnk=" + params[1] + "&ipa="+ r.RemoteAddr + "&dgt=" + dgt,"php",nil);
+					//http.Post(php,"php",nil);
 			
 
 		
@@ -223,9 +227,13 @@ func handler(w http.ResponseWriter, r *http.Request) {
 				adv := query.Get("adv")
 				cmp := query.Get("cmp")
 				dgt := query.Get("dgt")
+				
+				php := "http://www.password.com.br/php/evt.php?adv=" + adv + "&cmp=" + cmp + "&lnk=" + params[1] + "&ipa="+ r.RemoteAddr + "&dgt=" + dgt
+					
+				http.Error(w, php, 403)
+				return
 
-				http.Post("http://www.password.com.br/php/apt.php?adv=" + adv + "&cmp=" + cmp + "&ipa="+ r.RemoteAddr + "&dgt=" + dgt,"php",nil);
-			
+				//http.Post(php,"php",nil);
 
 		
 			} 
