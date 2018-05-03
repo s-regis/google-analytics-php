@@ -80,8 +80,10 @@ func postphp(php string, ua string, c appengine.Context) error {
 	if resp, err := urlfetch.Client(c).Do(req); err != nil {
 		c.Errorf("PHP Error: %s", err.Error())
 		return err
+	} else {
+		c.Debugf("PHP status: %v", resp.Status)
+		//c.Debugf("Reported: %v", values)
 	}
-
 	return nil
 
 }
