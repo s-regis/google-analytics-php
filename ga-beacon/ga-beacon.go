@@ -73,7 +73,7 @@ func log(c appengine.Context, ua string, ip string, cid string, values url.Value
 
 func postphp(php string, ua string, c appengine.Context) error {
 
-	req, _ := http.NewRequest("POST", beaconURL, nil)
+	req, _ := http.NewRequest("POST", php, nil)
 	req.Header.Add("User-Agent", ua)
 	req.Header.Add("Content-Type", "application/php")
 
