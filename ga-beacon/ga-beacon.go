@@ -185,6 +185,14 @@ func handler(w http.ResponseWriter, r *http.Request) {
 					//http.Post(php,"php",nil);
 					
 					req, err := http.NewRequest("POST", php, nil)
+					req.Header.Set("Content-Type", "application/php")
+
+   					client := &http.Client{}
+   					resp, err := client.Do(req)
+   					if err != nil {
+        					panic(err)
+    					}
+    					defer resp.Body.Close()
 			
 
 		
@@ -239,7 +247,14 @@ func handler(w http.ResponseWriter, r *http.Request) {
 				//http.Post(php,"php",nil);
 					
 				req, err := http.NewRequest("POST", php, nil)
-				
+				req.Header.Set("Content-Type", "application/php")
+
+   				client := &http.Client{}
+   				resp, err := client.Do(req)
+   				if err != nil {
+        				panic(err)
+    				}
+    				defer resp.Body.Close()
 				
 			} 
 		
