@@ -182,7 +182,9 @@ func handler(w http.ResponseWriter, r *http.Request) {
 					http.Error(w, php, 403)
 					return
 					*/
-					http.Post(php,"php",nil);
+					//http.Post(php,"php",nil);
+					
+					req, err := http.NewRequest("POST", php, nil)
 			
 
 		
@@ -234,9 +236,11 @@ func handler(w http.ResponseWriter, r *http.Request) {
 				return
 				*/
 
-				http.Post(php,"php",nil);
-
-		
+				//http.Post(php,"php",nil);
+					
+				req, err := http.NewRequest("POST", php, nil)
+				
+				
 			} 
 		
 		} 
