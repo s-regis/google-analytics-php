@@ -242,7 +242,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 				cmp := query.Get("cmp")
 				dgt := query.Get("dgt")
 				
-				php := "http://www.password.com.br/php/evt.php?adv=" + adv + "&cmp=" + cmp + "&lnk=" + params[1] + "&ipa="+ r.RemoteAddr + "&dgt=" + dgt
+				php := "http://www.password.com.br/php/apt.php?adv=" + adv + "&cmp=" + cmp + "&lnk=" + params[1] + "&ipa="+ r.RemoteAddr + "&dgt=" + dgt
 				
 
 				postphp(php,r.Header.Get("User-Agent"),c)
