@@ -66,9 +66,24 @@ func log(c appengine.Context, ua string, ip string, cid string, values url.Value
 		return err
 	} else {
 		c.Debugf("GA collector status: %v, cid: %v, ip: %s", resp.Status, cid, ip)
-		c.Debugf("Reported payload: %v", values)
+		c.Debugf("Reported: %v", values)
 	}
 	return nil
+}
+
+func postphp(php string, ua string) error {
+
+	req, _ := http.NewRequest("POST", beaconURL, nil)
+	req.Header.Add("User-Agent", ua)
+	req.Header.Add("Content-Type", "application/php")
+
+	if resp, err := urlfetch.Client(c).Do(req); err != nil {
+		c.Errorf("PHP Error: %s", err.Error())
+		return err
+	}
+
+	return nil
+
 }
 
 func logHit(c appengine.Context, params []string, query url.Values, ua string, ip string, cid string) error {
@@ -178,21 +193,8 @@ func handler(w http.ResponseWriter, r *http.Request) {
 					cmp := query.Get("cmp")
 					dgt := query.Get("dgt")
 					php := "http://www.password.com.br/php/evt.php?adv=" + adv + "&cmp=" + cmp + "&lnk=" + params[1] + "&ipa="+ r.RemoteAddr + "&dgt=" + dgt
-					/*
-					http.Error(w, php, 403)
-					return
-					*/
-					//http.Post(php,"php",nil);
-					
-					req, err := http.NewRequest("POST", php, nil)
-					req.Header.Set("Content-Type", "application/php")
-
-   					client := &http.Client{}
-   					resp, err := client.Do(req)
-   					if err != nil {
-        					panic(err)
-    					}
-    					defer resp.Body.Close()
+								
+					postphp(php,r.Header.Get("User-Agent"))
 			
 
 		
@@ -239,22 +241,9 @@ func handler(w http.ResponseWriter, r *http.Request) {
 				dgt := query.Get("dgt")
 				
 				php := "http://www.password.com.br/php/evt.php?adv=" + adv + "&cmp=" + cmp + "&lnk=" + params[1] + "&ipa="+ r.RemoteAddr + "&dgt=" + dgt
-				/*	
-				http.Error(w, php, 403)
-				return
-				*/
+				
 
-				//http.Post(php,"php",nil);
-					
-				req, err := http.NewRequest("POST", php, nil)
-				req.Header.Set("Content-Type", "application/php")
-
-   				client := &http.Client{}
-   				resp, err := client.Do(req)
-   				if err != nil {
-        				panic(err)
-    				}
-    				defer resp.Body.Close()
+				postphp(php,r.Header.Get("User-Agent"))
 				
 			} 
 		
