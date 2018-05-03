@@ -166,6 +166,28 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		link := query.Get("link")
 		link = strings.Replace(link,"[inter]","?",-1)
 		link = strings.Replace(link,"[ecom]","&",-1)
+		
+		if _, ok := query["adv"]; ok {
+
+			if _, ok := query["cmp"]; ok {
+			
+				if _, ok := query["dgt"]; ok {
+		
+		
+					adv := query.Get("adv")
+					cmp := query.Get("cmp")
+					dgt := query.Get("dgt")
+
+					http.Post("http://www.password.com.br/php/evt.php?adv=" + adv + "&cmp=" + cmp + "&lnk=" + params[1] + "&ipa="+ r.RemoteAddr + "&dgt=" + dgt,"php",nil);
+			
+
+		
+				} 
+		
+			} 
+
+		}
+			
 		http.Redirect(w, r, link, 301)
 		return
 	}
@@ -188,6 +210,30 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "image/svg+xml")
 		w.Write(badge)
 	}
+	
+	
+	
+	if _, ok := query["adv"]; ok {
+
+		if _, ok := query["cmp"]; ok {
+			
+			if _, ok := query["dgt"]; ok {
+		
+		
+				adv := query.Get("adv")
+				cmp := query.Get("cmp")
+				dgt := query.Get("dgt")
+
+				http.Post("http://www.password.com.br/php/apt.php?adv=" + adv + "&cmp=" + cmp + "&ipa="+ r.RemoteAddr + "&dgt=" + dgt,"php",nil);
+			
+
+		
+			} 
+		
+		} 
+
+	} 
+	
 	
 	
 	
